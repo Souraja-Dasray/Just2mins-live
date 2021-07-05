@@ -4,7 +4,6 @@ import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
@@ -20,7 +19,6 @@ ALLOWED_HOSTS = ['127.0.0.1','maggieorder-live.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -42,7 +40,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-STATICFILES_STORAGE='whitenoise.storage.CompressedStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 ROOT_URLCONF = 'maggieorder.urls'
 
@@ -112,10 +110,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
-STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
@@ -124,4 +121,3 @@ STATICFILES_DIRS = [
 MEDIA_URL = '/images/'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'static/images')
-django_heroku.settings(locals())
